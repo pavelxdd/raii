@@ -1,0 +1,7 @@
+.*/
+!.githooks/
+.vscode/
+.vscode-ctags
+/build*/
+*.iml
+CMakeUserPresets.json
