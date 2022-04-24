@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
-project(raii NONE)
+project(raii C)
+
+include(GNUInstallDirs)
+add_subdirectory(src)
 
 find_program(ASTYLE astyle)
 if(ASTYLE)
@@ -7,8 +10,7 @@ if(ASTYLE)
         VERBATIM
         USES_TERMINAL
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMAND ${ASTYLE} --options=${CMAKE_SOURCE_DIR}/.astylerc -Q -n raii.h
+        COMMAND ${ASTYLE} --options=${CMAKE_SOURCE_DIR}/.astylerc -Q -n -r
+            "src/*.h"
     )
 endif()
-
-install(FILES raii.h DESTINATION include)
