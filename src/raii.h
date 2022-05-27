@@ -22,6 +22,14 @@
 #   endif
 #endif
 
+#ifndef __raii_inline
+#   if defined(__GNUC__) || __raii_has_attribute(__always_inline__)
+#       define __raii_inline inline __attribute__((__always_inline__))
+#   else
+#       define __raii_inline inline
+#   endif
+#endif
+
 #ifndef __raii_unused
 #   if defined(__GNUC__) || __raii_has_attribute(__unused__)
 #       define __raii_unused __attribute__((__unused__))
@@ -47,8 +55,8 @@
 #if defined(__clang__)
 #if __raii_has_feature(blocks)
 typedef void (^__raii_cleanup_block_t)(void);
-[[maybe_unused, gnu::always_inline]] \
-static inline void __raii_cleanup_block(__raii_cleanup_block_t *b) { (*b)(); }
+static __raii_inline __raii_unused \
+void __raii_cleanup_block(__raii_cleanup_block_t *b) { (*b)(); }
 #define RAII(__type, __name, __dtor, __init) \
     __block __type __name = (__init); \
     __raii_unused __raii_cleanup(__raii_cleanup_block) \
