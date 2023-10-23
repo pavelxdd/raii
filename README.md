@@ -6,8 +6,8 @@ For GCC it uses nested functions for cleanup handlers.
 For Clang it uses Blocks language extension.
 
 ````bash
-cmake . -Bbuild -DCMAKE_INSTALL_PREFIX=/usr/local
-cmake --build build --target install
+meson setup build -Dprefix=/usr/local
+meson install -Cbuild
 ````
 
 ## Example

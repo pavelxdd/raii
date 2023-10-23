@@ -23,7 +23,7 @@
 #endif
 
 #ifndef __raii_inline
-#   if defined(__GNUC__) || __raii_has_attribute(__always_inline__)
+#   if __raii_has_attribute(__always_inline__)
 #       define __raii_inline inline __attribute__((__always_inline__))
 #   else
 #       define __raii_inline inline
@@ -31,7 +31,7 @@
 #endif
 
 #ifndef __raii_unused
-#   if defined(__GNUC__) || __raii_has_attribute(__unused__)
+#   if __raii_has_attribute(__unused__)
 #       define __raii_unused __attribute__((__unused__))
 #   else
 #       define __raii_unused
@@ -39,7 +39,7 @@
 #endif
 
 #ifndef __raii_cleanup
-#   if defined(__GNUC__) || __raii_has_attribute(__cleanup__)
+#   if __raii_has_attribute(__cleanup__)
 #       define __raii_cleanup(x) __attribute__((__cleanup__(x)))
 #   else
 #       error "attribute cleanup is not supported"
